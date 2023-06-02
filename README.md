@@ -37,7 +37,6 @@
 
         protected $commands = [
             'App\Console\Commands\CreateNewProduct',
-            'App\Console\Commands\PostBlog',
         ];
 
 - Mở comand line lên và chạy lệnh php artisan create:product
@@ -61,12 +60,17 @@
             $this->info('New blog has been posted!');
             Log::info('New blog has been posted!');
         }
+- Để sử dụng được câu lệnh này chúng ta cần đăng ký nó trong app\Console\Kernel.php trong thuộc tính commands:
+
+        protected $commands = [
+            'App\Console\Commands\PostBlog',
+        ];
 
 - Định nghĩa Schedules trong function schedule(Schedule $schedule) ở App\Console\Kernel:
 
         protected function schedule(Schedule $schedule)
         {
-            $schedule->command('post:blog')->everyMinute(); (Chạy command mỗi phút 1 lần)
+            $schedule->command('post:blog')->everyMinute();  // Chạy command mỗi phút 1 lần
         }
 
 - Mở comand line lên và chạy lệnh php artisan schedule:work
